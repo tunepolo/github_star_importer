@@ -63,9 +63,11 @@ func main() {
 		for _, repo := range allRepositories {
 			_, err := client.Activity.Star(ctx, repo.Repository.Owner.GetLogin(), repo.Repository.GetName())
 			if err != nil {
-				fmt.Printf("Starred : %s/%s\n", repo.Repository.Owner.GetLogin(), repo.Repository.GetName())
+				return err
 			}
+			fmt.Printf("Starred : %s/%s\n", repo.Repository.Owner.GetLogin(), repo.Repository.GetName())
 		}
+
 		return nil
 	}
 
