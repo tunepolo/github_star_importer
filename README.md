@@ -1,0 +1,2 @@
+# github_start_importer
+指定のGithubアカウントのStarを引き継ぐ
