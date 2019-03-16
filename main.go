@@ -1,10 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
+	"github.com/google/go-github/github"
 	"github.com/urfave/cli"
+	"golang.org/x/oauth2"
 )
 
 func main() {
@@ -33,10 +36,20 @@ func main() {
 	}
 
 	app.Action = func(c *cli.Context) error {
-		fmt.Printf("from: %+v\n", c.String("from"))
-		fmt.Printf("to: %+v\n", c.String("to"))
-		fmt.Printf("token: %+v\n", c.String("token"))
-		return nil
+		ctx := context.Background()
+		ts := oauth2.StaticTokenSource(
+			&oauth2.Token{AccessToken: c.String("token")},
+		)
+		tc := oauth2.NewClient(ctx, ts)
+
+		client := github.NewClient(tc)
+		repositories, _, err := client.Repositories.List(ctx, "", nil)
+
+		for _, repo := range repositories {
+			fmt.Printf("%+v\n", repo.GetFullName())
+		}
+
+		return err
 	}
 
 	app.Run(os.Args)
