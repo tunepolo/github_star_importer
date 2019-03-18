@@ -6,6 +6,8 @@ import (
 	"github.com/urfave/cli"
 )
 
+var Version string = "0.0.1"
+
 func main() {
 	newApp().Run(os.Args)
 }
@@ -15,7 +17,7 @@ func newApp() *cli.App {
 
 	app.Name = "Github Star Importer"
 	app.Usage = "指定アカウントのStar情報を別アカウントにインポートする"
-	app.Version = "0.0.1"
+	app.Version = Version
 
 	app.Flags = globalFlags
 	app.Action = doImport
