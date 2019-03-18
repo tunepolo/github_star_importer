@@ -11,6 +11,10 @@ import (
 )
 
 func main() {
+	newApp().Run(os.Args)
+}
+
+func newApp() *cli.App {
 	app := cli.NewApp()
 
 	app.Name = "Github Star Importer"
@@ -71,5 +75,5 @@ func main() {
 		return nil
 	}
 
-	app.Run(os.Args)
+	return app
 }
