@@ -11,13 +11,11 @@ import (
 
 var globalFlags = []cli.Flag{
 	cli.StringFlag{
-		Name:  "from, f",
-		Value: "tune",
+		Name:  "from",
 		Usage: "import target username",
 	},
 	cli.StringFlag{
 		Name:  "token",
-		Value: "PERSONAL_ACCESS_TOKEN",
 		Usage: "github personal access token for star import",
 	},
 }
