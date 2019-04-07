@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  reviewdog: timakin/reviewdog@0.2.0
+
 executors:
   default:
     working_directory: /go/src/github.com/tunepolo/github_star_importer
@@ -19,3 +22,7 @@ workflows:
   continuous-integration:
     jobs:
       - test
+      - reviewdog/review:
+          executor: default
+          linters: golang.org/x/lint/golint github.com/kisielk/errcheck
+          reporter: local
