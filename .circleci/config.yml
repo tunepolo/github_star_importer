@@ -30,9 +30,4 @@ workflows:
   continuous-integration:
     jobs:
       - test
-      - review:
-          context: reviewdog
-          filters:
-            branches:
-              ignore:
-                - master
+      - review
