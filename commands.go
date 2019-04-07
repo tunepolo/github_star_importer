@@ -24,6 +24,10 @@ func doImport(c *cli.Context) error {
 	fromUser := c.String("from")
 	token := c.String("token")
 
+	if fromUser == "" || token == "" {
+		return cli.NewExitError("insufficient parameters supplied to the command", 1)
+	}
+
 	// トークンを使ってGitHubアクセスのためのclientを生成
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(

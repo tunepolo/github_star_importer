@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/urfave/cli"
@@ -9,7 +10,10 @@ import (
 var Version string = "0.0.1"
 
 func main() {
-	newApp().Run(os.Args)
+	err := newApp().Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func newApp() *cli.App {
