@@ -15,14 +15,23 @@ jobs:
       name: default
     steps:
       - checkout
-      - run: go get -v -t -d ./...
-      - run: go test -v ./...
+      - run: make
+      - run: make test
+  review:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - reviewdog/review:
+          linters: "golang.org/x/lint/golint github.com/kisielk/errcheck"
 
 workflows:
   continuous-integration:
     jobs:
       - test
-      - reviewdog/review:
-          executor: default
-          linters: golang.org/x/lint/golint github.com/kisielk/errcheck
-          reporter: local
+      - review:
+          context: reviewdog
+          filters:
+            branches:
+              ignore:
+                - master
