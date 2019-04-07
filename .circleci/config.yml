@@ -15,7 +15,8 @@ jobs:
       name: default
     steps:
       - checkout
-      - run: make
+      - run: make deps
+      - run: make build
       - run: make test
   review:
     executor:
