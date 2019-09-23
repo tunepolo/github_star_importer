@@ -1,13 +1,10 @@
 version: 2.1
 
-orbs:
-  reviewdog: timakin/reviewdog@0.2.0
-
 executors:
   default:
     working_directory: /go/src/github.com/tunepolo/github_star_importer
     docker:
-      - image: circleci/golang:1.11
+      - image: circleci/golang:1.13
 
 jobs:
   test:
@@ -18,16 +15,8 @@ jobs:
       - run: make deps
       - run: make build
       - run: make test
-  review:
-    executor:
-      name: default
-    steps:
-      - checkout
-      - reviewdog/review:
-          linters: "golang.org/x/lint/golint github.com/kisielk/errcheck"
 
 workflows:
   continuous-integration:
     jobs:
       - test
-      - review
